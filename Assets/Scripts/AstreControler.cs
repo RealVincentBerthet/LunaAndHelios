@@ -54,7 +54,7 @@ public class AstreControler : MonoBehaviour
             {
                 isSun = false;
                 isRotate = false;
-                Lum_Background.color = new Color(0 / 255f, 19 / 255f, 183 / 255f);
+                Lum_Background.color = color_Nuit;
             }
 
         }
@@ -72,7 +72,7 @@ public class AstreControler : MonoBehaviour
             }
             else //fin passage nuit à jour
             {
-                Lum_Background.color = new Color(1, 1, 1);
+                Lum_Background.color = color_Jour;
                 isSun = true;
                 isRotate = false;
             }
