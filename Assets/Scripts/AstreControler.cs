@@ -64,8 +64,6 @@ public class AstreControler : MonoBehaviour
 
                 //evolution couleur vers nuit
                 float t = _angle % (2 * Mathf.PI) / Mathf.PI;
-                print("angle : " + _angle % (2 * Mathf.PI));
-                print("t : " + t);
                 Lum_Background.color = Color.Lerp(color_Jour, color_Nuit,t);
             }
             else //fin passage jour à nuit
@@ -90,9 +88,6 @@ public class AstreControler : MonoBehaviour
 
                 float t = 1 - (_angle % (2 * Mathf.PI) - Mathf.PI )/ Mathf.PI;
                 Lum_Background.color = Color.Lerp(color_Jour, color_Nuit, t);
-
-                print("angle : " + _angle % (2 * Mathf.PI));
-                print("t : " + t);
             }
             else //fin passage nuit à jour
             {
