@@ -43,7 +43,6 @@ public class AstreControler : MonoBehaviour
         {
 
             _angle += RotateSpeed * Time.deltaTime;
-            print(_angle);
             if (_angle % (2 * Mathf.PI) < Mathf.PI )
             {
                 var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
@@ -63,7 +62,6 @@ public class AstreControler : MonoBehaviour
         {
 
             _angle += RotateSpeed * Time.deltaTime;
-            print(_angle);
             if (_angle % (2 * Mathf.PI) > Mathf.PI)
             {
                 var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;

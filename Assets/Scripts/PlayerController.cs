@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         #endregion
         #region Movement
         horizontalMove = 0f;
+        if(controller)
         if (isLuna)
         {
     
@@ -30,12 +31,12 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Q))
             {
-                horizontalMove = -1*runSpeed;
+                horizontalMove = -1*runSpeed/(controller.IsGrounded() ? 1 : 2);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                horizontalMove =  runSpeed;
-            }
+                    horizontalMove = runSpeed / (controller.IsGrounded() ? 1 : 2);
+                }
         }
         else
         {
@@ -46,12 +47,12 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                horizontalMove = -1 * runSpeed;
-            }
+                 horizontalMove = -1 * runSpeed / (controller.IsGrounded() ? 1 : 2);
+             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                horizontalMove = runSpeed;
-            }
+                horizontalMove = runSpeed / (controller.IsGrounded() ? 1 : 2);
+             }
         }
         #endregion
     }
