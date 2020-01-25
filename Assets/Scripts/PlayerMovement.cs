@@ -11,14 +11,43 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
 
+    public bool isLuna = false;
+
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        if (Input.GetButton("Jump"))
+        horizontalMove = 0f;
+        if (isLuna)
         {
-            jump = true;
+    
+            if (Input.GetKey(KeyCode.Z))
+            {
+                jump = true;
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                horizontalMove = -1*runSpeed;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                horizontalMove =  runSpeed;
+            }
+        }
+        else
+        {
+            //Rival code
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                jump = true;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontalMove = -1 * runSpeed;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontalMove = runSpeed;
+            }
         }
     }
 
