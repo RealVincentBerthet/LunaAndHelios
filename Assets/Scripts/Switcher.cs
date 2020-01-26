@@ -5,6 +5,8 @@ using UnityEngine.Experimental.Rendering.LWRP;
 public class Switcher : MonoBehaviour
 {
     public AstreControler m_astre;
+    public List<LigthTrigger> l_light;
+    public List<Light2D> l_light2D;
     public LigthTrigger m_light;
     public Light2D m_light2d;
     private List<Collider2D> m_collide;
@@ -65,16 +67,36 @@ public class Switcher : MonoBehaviour
     private void ChangeLight()
     {
         //la lampe c'est soit nuit soit vide
-
-        if (m_light.tag.Equals("night"))
+        if(l_light != null && l_light2D != null)
         {
-            m_light.tag = "empty";
-            m_light2d.intensity = 1;
-        }
-        else
+            for(int i = 0; i < l_light2D.Count; i++)
+            {
+                Light2D l2d = l_light2D[i];
+                LigthTrigger ltrigger = l_light[i];
+                if (ltrigger.tag.Equals("night"))
+                {
+                    ltrigger.tag = "empty";
+                    l2d.intensity = 1;
+                }
+                else
+                {
+                    ltrigger.tag = "night";
+                    l2d.intensity = 0;
+                }
+            }
+        } else
         {
-            m_light.tag = "night";
-            m_light2d.intensity = 0;
+            if (m_light.tag.Equals("night"))
+            {
+                m_light.tag = "empty";
+                m_light2d.intensity = 1;
+            }
+            else
+            {
+                m_light.tag = "night";
+                m_light2d.intensity = 0;
+            }
         }
+  
     }
 }
