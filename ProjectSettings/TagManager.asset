@@ -6,6 +6,7 @@ TagManager:
   tags:
   - day
   - night
+  - empty
   layers:
   - Default
   - TransparentFX
