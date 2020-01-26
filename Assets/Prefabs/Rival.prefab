@@ -218,6 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1089625696954161475}
   runSpeed: 50
+  animator: {fileID: 8573345139464118176}
+  otherPlayer: {fileID: 0}
   isLuna: 0
 --- !u!95 &7687222361337912287
 Animator:
