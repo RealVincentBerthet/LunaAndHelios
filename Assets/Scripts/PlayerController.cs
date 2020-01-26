@@ -109,8 +109,15 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("GG ! Next Level");
         GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
-        yield return new WaitForSeconds(4.0f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        yield return new WaitForSeconds(2.0f);
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCount)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
 
