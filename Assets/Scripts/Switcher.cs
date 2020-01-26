@@ -56,6 +56,7 @@ public class Switcher : MonoBehaviour
     //ACTIONS
     public void Change()
     {
+        this.GetComponent<AudioSource>().Play();
         if (m_astre != null)
         {
             m_astre.isRotate = true;
