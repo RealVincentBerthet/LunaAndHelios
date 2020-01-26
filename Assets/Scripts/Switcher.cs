@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class Switcher : MonoBehaviour
 {
     public AstreControler m_astre;
     public LigthTrigger m_light;
+    public Light2D m_light2d;
     private List<Collider2D> m_collide;
+
 
     void Awake()
     {
@@ -19,11 +22,13 @@ public class Switcher : MonoBehaviour
         {
             m_collide.Add(collision);
         }
+        collision.GetComponent<PlayerController>().showHelpBulb(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         m_collide.Remove(collision);
+        collision.GetComponent<PlayerController>().showHelpBulb(false); 
     }
 
     private void Update()
@@ -64,10 +69,12 @@ public class Switcher : MonoBehaviour
         if (m_light.tag.Equals("night"))
         {
             m_light.tag = "empty";
+            m_light2d.intensity = 1;
         }
         else
         {
             m_light.tag = "night";
+            m_light2d.intensity = 0;
         }
     }
 }

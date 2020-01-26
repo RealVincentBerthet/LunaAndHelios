@@ -1,3 +1,4 @@
+
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,14 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     public Animator animator;
     public PlayerController otherPlayer;
+    public SpriteRenderer helpBulb;
 
     public bool isLuna = false;
 
     public void Awake()
     {
+
+        helpBulb.enabled = false;
     }
     // Update is called once per frame
     void Update()
@@ -116,6 +120,9 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+    public void showHelpBulb(bool visible)
+    {
+        helpBulb.enabled = visible;
+    }
 }
-
-
