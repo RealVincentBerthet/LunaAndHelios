@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     public Animator animator;
     public PlayerController otherPlayer;
+    public SpriteRenderer helpBulb;
 
     public bool isLuna = false;
 
     public void Awake()
     {
+        helpBulb.enabled = false;
     }
     // Update is called once per frame
     void Update()
@@ -100,6 +102,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         Debug.Log("GG ! Next Level");
+    }
+
+    public void showHelpBulb(bool visible)
+    {
+        helpBulb.enabled = visible;
     }
 }
 
