@@ -26,38 +26,45 @@ public class PlayerController : MonoBehaviour
         #endregion
         #region Movement
         horizontalMove = 0f;
-        if(controller && m_alive)
-        if (isLuna)
+        if(!m_alive)
         {
-    
-            if (Input.GetKey(KeyCode.Z))
+            horizontalMove = 0;
+            return;
+        }
+        if (controller && m_alive)
+        {
+            if (isLuna)
             {
-                jump = true;
-            }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                horizontalMove = -1*runSpeed/(controller.IsGrounded() ? 1 : 2);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
+
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    jump = true;
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    horizontalMove = -1 * runSpeed / (controller.IsGrounded() ? 1 : 2);
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
                     horizontalMove = runSpeed / (controller.IsGrounded() ? 1 : 2);
                 }
-        }
-        else
-        {
-            //Rival code
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                jump = true;
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            else
             {
-                 horizontalMove = -1 * runSpeed / (controller.IsGrounded() ? 1 : 2);
-             }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                horizontalMove = runSpeed / (controller.IsGrounded() ? 1 : 2);
-             }
+                //Rival code
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    jump = true;
+                }
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    horizontalMove = -1 * runSpeed / (controller.IsGrounded() ? 1 : 2);
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    horizontalMove = runSpeed / (controller.IsGrounded() ? 1 : 2);
+                }
+            }
         }
         #endregion
     }
@@ -80,7 +87,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Rival is dead");
         }
         animator.SetTrigger("Death");
-        otherPlayer.Die();
         yield return null;
     }
 
