@@ -30,8 +30,12 @@ public class Menu : MonoBehaviour
 
     public void Update()
     {
-        m_quitButton.gameObject.SetActive(!m_back.isActiveAndEnabled);
-        m_back.gameObject.SetActive(!m_quitButton.isActiveAndEnabled);
+        // m_quitButton.gameObject.SetActive(!m_back.isActiveAndEnabled);
+        // m_back.gameObject.SetActive(!m_quitButton.isActiveAndEnabled);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
 }

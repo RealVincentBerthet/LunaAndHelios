@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -81,12 +82,15 @@ public class PlayerController : MonoBehaviour
         if (isLuna)
         {
             Debug.Log("Luna is dead");
+            GameObject.Find("LunadDead").SetActive(true);
         }
         else
         {
             Debug.Log("Rival is dead");
+            GameObject.Find("HeliosDead").SetActive(true);
         }
         animator.SetTrigger("Death");
+        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
         yield return null;
     }
 
@@ -98,8 +102,19 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator NextLevel()
     {
-        yield return new WaitForSeconds(1.5f);
         Debug.Log("GG ! Next Level");
+        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
+        yield return new WaitForSeconds(2.0f);
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCount)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+
+
     }
 }
 
