@@ -10,9 +10,14 @@ public class PlayerController : MonoBehaviour
     private bool m_alive = true;
     float horizontalMove = 0f;
     bool jump = false;
+    public Animator animator;
+    public PlayerController otherPlayer;
 
     public bool isLuna = false;
 
+    public void Awake()
+    {
+    }
     // Update is called once per frame
     void Update()
     {
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour
         #endregion
         #region Movement
         horizontalMove = 0f;
-        if(controller)
+        if(controller && m_alive)
         if (isLuna)
         {
     
@@ -74,6 +79,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Rival is dead");
         }
+        animator.SetTrigger("Death");
+        otherPlayer.Die();
         yield return null;
     }
 
