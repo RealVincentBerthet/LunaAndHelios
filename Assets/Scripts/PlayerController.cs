@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public PlayerController otherPlayer;
     public SpriteRenderer helpBulb;
+    public GameObject m_deadScreen;
 
     public bool isLuna = false;
 
@@ -86,16 +87,16 @@ public class PlayerController : MonoBehaviour
         if (isLuna)
         {
             Debug.Log("Luna is dead");
-            GameObject.Find("LunadDead").SetActive(true);
         }
         else
         {
             Debug.Log("Rival is dead");
-            GameObject.Find("HeliosDead").SetActive(true);
         }
+
         animator.SetTrigger("Death");
-        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
-        yield return null;
+        yield return new WaitForSeconds(1.0f);
+        m_deadScreen.SetActive(true);
+        StartCoroutine(RetryLevel());
     }
 
 
@@ -117,7 +118,15 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
 
+
+    public IEnumerator RetryLevel()
+    {
+        Debug.Log("Retry");
+        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 
