@@ -22,11 +22,13 @@ public class Switcher : MonoBehaviour
         {
             m_collide.Add(collision);
         }
+        collision.GetComponent<PlayerController>().showHelpBulb(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         m_collide.Remove(collision);
+        collision.GetComponent<PlayerController>().showHelpBulb(false); 
     }
 
     private void Update()
