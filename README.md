@@ -9,8 +9,6 @@ This game has been released during the **Game Jam 2020**. The aim of this event 
 
 ![](./Docs/GameJam2k20.jpg)
 
-[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=VID)
-
 
 ## Members
 
