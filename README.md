@@ -4,7 +4,7 @@
 
 This game has been released during the **Game Jam 2020**. The aim of this event was to build a video game in 35 hours on the subject : **Safe in the dark**
 
-*Youtube Gameplay*
+*[Youtube Gameplay](https://www.youtube.com/watch?v=EwTJOxKciyE&feature=youtu.be)*
 [![Watch the video](https://img.youtube.com/vi/EwTJOxKciyE/maxresdefault.jpg)](https://youtu.be/EwTJOxKciyE)
 
 ![](./Docs/GameJam2k20.jpg)
