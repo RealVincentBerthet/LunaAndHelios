@@ -1,6 +1,5 @@
 
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,30 +10,30 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 40f;
     private bool m_alive = true;
     float horizontalMove = 0f;
+    float verticalMove = 0f;
     bool jump = false;
     public Animator animator;
     public PlayerController otherPlayer;
     public SpriteRenderer helpBulb;
     public GameObject m_deadScreen;
-
     public bool isLuna = false;
+    private bool isOnLadder = false;
 
     public void Awake()
     {
-
         helpBulb.enabled = false;
+        m_deadScreen.SetActive(false);
     }
-    // Update is called once per frame
+
     void Update()
     {
-        #region Action
-
-        #endregion
         #region Movement
         horizontalMove = 0f;
+        verticalMove = 0f;
         if(!m_alive)
         {
             horizontalMove = 0;
+            verticalMove = 0f;
             return;
         }
         if (controller && m_alive)
@@ -44,7 +43,14 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Z))
                 {
-                    jump = true;
+                    if (isOnLadder)
+                    {
+                        verticalMove = -this.GetComponent<Rigidbody2D>().velocity.y+10;
+                    }
+                    else
+                    {
+                        jump = true;
+                    }     
                 }
                 if (Input.GetKey(KeyCode.Q))
                 {
@@ -60,7 +66,14 @@ public class PlayerController : MonoBehaviour
                 //Rival code
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    jump = true;
+                    if (isOnLadder)
+                    {
+                        verticalMove = -this.GetComponent<Rigidbody2D>().velocity.y + 10;
+                    }
+                    else
+                    {
+                        jump = true;
+                    }
                 }
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
@@ -77,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime,verticalMove, false, jump);
         jump = false;
     }
 
@@ -86,15 +99,6 @@ public class PlayerController : MonoBehaviour
         if (IsAlive())
         {
             m_alive = false;
-            if (isLuna)
-            {
-                Debug.Log("Luna is dead");
-            }
-            else
-            {
-                Debug.Log("Rival is dead");
-            }
-
             int random = Random.Range(0, tab_audio.Length);
             tab_audio[random].Play();
 
@@ -105,7 +109,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public bool IsAlive()
     {
         return m_alive;
@@ -113,26 +116,23 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator NextLevel()
     {
-        Debug.Log("GG ! Next Level");
-        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
         yield return new WaitForSeconds(2.0f);
-
-         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
 
     public IEnumerator RetryLevel()
     {
-        Debug.Log("Retry");
-        GameObject.Find("FXPanel").GetComponent<Animator>().SetTrigger("end");
         yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 
-    public void showHelpBulb(bool visible)
+    public void ShowHelpBulb(bool visible)
     {
         helpBulb.enabled = visible;
+    }
+
+    public void SetOnLadder(bool b)
+    {
+        isOnLadder = b;
     }
 }

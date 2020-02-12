@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering.LWRP;
 
 public class AstreControler : MonoBehaviour
@@ -23,13 +21,13 @@ public class AstreControler : MonoBehaviour
     public Color color_Jour = new Color(1, 1, 1); 
     public Color color_Nuit = new Color(0 / 255f, 19 / 255f, 183 / 255f);
     public GameObject m_atroGroup;
+    public Light2D m_lightRocks;
 
     public bool GetIsSun()
     {
         return isSun;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _centre = transform.position;
@@ -41,11 +39,8 @@ public class AstreControler : MonoBehaviour
         Moon.transform.position = _centre - offset;
 
         Lum_Background.color = color_Jour;
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isSun)
@@ -66,6 +61,7 @@ public class AstreControler : MonoBehaviour
                 //evolution couleur vers nuit
                 float t = _angle % (2 * Mathf.PI) / Mathf.PI;
                 Lum_Background.color = Color.Lerp(color_Jour, color_Nuit,t);
+                m_lightRocks.intensity = 1-t;
             }
             else //fin passage jour à nuit
             {
@@ -81,12 +77,10 @@ public class AstreControler : MonoBehaviour
                     t[i].tag = status;
                 }
             }
-
         }
 
         if (isRotate && !isSun)
         {
-
             _angle += RotateSpeed * Time.deltaTime;
             if (_angle % (2 * Mathf.PI) > Mathf.PI)
             {
@@ -97,6 +91,7 @@ public class AstreControler : MonoBehaviour
 
                 float t = 1 - (_angle % (2 * Mathf.PI) - Mathf.PI )/ Mathf.PI;
                 Lum_Background.color = Color.Lerp(color_Jour, color_Nuit, t);
+                m_lightRocks.intensity = 1-t;
             }
             else //fin passage nuit à jour
             {
@@ -113,8 +108,6 @@ public class AstreControler : MonoBehaviour
                     t[i].tag = status;
                 }
             }
-
         }
-
     }
 }
